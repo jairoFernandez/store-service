@@ -3,8 +3,10 @@ class StoresController < ApplicationController
 
   # GET /stores
   def index
-    @stores = Store.all
-    render json: @stores
+    @stores = Store.all.with_attached_image
+    # render :json => @stores, :include => {:name}, :except => [:created_at, :updated_at]
+
+    render json: @stores.to_json(include: { image:  :blob }, :except => [:created_at, :updated_at, :user])
   end
 
   # GET /stores/1
@@ -14,6 +16,7 @@ class StoresController < ApplicationController
 
   # POST /stores
   def create
+    binding.pry
     @store = Store.new(store_params)
 
     if @store.save
@@ -45,6 +48,6 @@ class StoresController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def store_params
-      params.require(:store).permit(:name, :description, :user)
+      params.require(:store).permit(:name, :description, :user, :image)
     end
 end

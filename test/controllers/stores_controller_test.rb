@@ -10,6 +10,12 @@ class StoresControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "shoud get valid properties" do
+    get stores_url, as: :json
+    byebug
+    assert_response :success
+  end
+
   test "should create store" do
     assert_difference('Store.count') do
       post stores_url, params: { store: { description: @store.description, name: @store.name, user: @store.user } }, as: :json
