@@ -16,7 +16,6 @@ class StoresController < ApplicationController
 
   # POST /stores
   def create
-    binding.pry
     @store = Store.new(store_params)
 
     if @store.save
