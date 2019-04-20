@@ -32,6 +32,9 @@ module StoreService
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
-    config.generators.test_framework :rspec
+    config.generators do |g|
+      g.test_framework :rspec
+      g.integration_tool :rspec
+    end
   end
 end
