@@ -3,10 +3,8 @@ class StoresController < ApplicationController
 
   # GET /stores
   def index
-    @stores = Store.all.with_attached_image
-    # render :json => @stores, :include => {:name}, :except => [:created_at, :updated_at]
-
-    render json: @stores.to_json(include: { image:  :blob }, :except => [:created_at, :updated_at, :user])
+    @stores = Store.all
+    render json: @stores
   end
 
   # GET /stores/1
