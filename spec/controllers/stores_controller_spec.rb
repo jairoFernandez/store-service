@@ -80,6 +80,13 @@ RSpec.describe StoresController, type: :controller do
         expect(response.content_type).to eq('application/json')
         expect(response.location).to eq(store_url(Store.last))
       end
+
+      it 'attaches the uploaded file' do
+        file = fixture_file_upload(Rails.root.join('public', 'rails-logo.jpg'), 'image/jpg')
+        expect {
+        post :create, params: { store: { name: "example", description: "Other description", image: file } }
+        }.to change(ActiveStorage::Attachment, :count).by(1)
+      end
     end
 
     context "with invalid params" do

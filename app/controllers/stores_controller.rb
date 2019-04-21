@@ -3,8 +3,10 @@ class StoresController < ApplicationController
 
   # GET /stores
   def index
-    @stores = Store.all
-    render json: @stores
+    @stores = Store.all.with_attached_image
+    render json: @stores.map { |store| 
+      store.image.attachment ? store.as_json.merge({ image: url_for(store.image) }) : store.as_json.merge({ image: '' })
+    }
   end
 
   # GET /stores/1
@@ -15,7 +17,7 @@ class StoresController < ApplicationController
   # POST /stores
   def create
     @store = Store.new(store_params)
-
+    @store.image.attach(params.dig(:store, :image))
     if @store.save
       render json: @store, status: :created, location: @store
     else
