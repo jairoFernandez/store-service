@@ -24,6 +24,8 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.3)
+    active_model_serializers (0.9.3)
+      activemodel (>= 3.2)
     activejob (5.2.3)
       activesupport (= 5.2.3)
       globalid (>= 0.3.6)
@@ -43,6 +45,22 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
     arel (9.0.0)
+    aws-eventstream (1.0.2)
+    aws-partitions (1.149.0)
+    aws-sdk-core (3.48.3)
+      aws-eventstream (~> 1.0, >= 1.0.2)
+      aws-partitions (~> 1.0)
+      aws-sigv4 (~> 1.1)
+      jmespath (~> 1.0)
+    aws-sdk-kms (1.16.0)
+      aws-sdk-core (~> 3, >= 3.48.2)
+      aws-sigv4 (~> 1.1)
+    aws-sdk-s3 (1.36.0)
+      aws-sdk-core (~> 3, >= 3.48.2)
+      aws-sdk-kms (~> 1)
+      aws-sigv4 (~> 1.0)
+    aws-sigv4 (1.1.0)
+      aws-eventstream (~> 1.0, >= 1.0.2)
     bootsnap (1.4.2)
       msgpack (~> 1.0)
     builder (3.2.3)
@@ -61,6 +79,7 @@ GEM
       activesupport (>= 4.2.0)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
+    jmespath (1.4.0)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -165,6 +184,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_model_serializers
+  aws-sdk-s3
   bootsnap (>= 1.1.0)
   byebug
   dotenv-rails
