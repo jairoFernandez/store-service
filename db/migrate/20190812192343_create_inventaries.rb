@@ -3,8 +3,9 @@ class CreateInventaries < ActiveRecord::Migration[5.2]
     create_table :inventaries do |t|
       t.string :name
       t.text :description
-      t.integer :initial-date
-      t.integer :end-date
+      t.integer :initiaDate
+      t.integer :endDate
+      t.integer :store_id
 
       t.timestamps
     end
