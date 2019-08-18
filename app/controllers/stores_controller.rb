@@ -4,7 +4,7 @@ class StoresController < ApplicationController
   # GET /stores
   def index
     @stores = Store.all.with_attached_image
-    render json: @stores.map { |store| 
+    render json: @stores.map { |store|
       store.image.attachment ? store.as_json.merge({ image: url_for(store.image) }) : store.as_json.merge({ image: '' })
     }
   end
