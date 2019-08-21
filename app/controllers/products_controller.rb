@@ -7,7 +7,10 @@ class ProductsController < ApplicationController
   def index
     @products = Product.all
 
-    render json: @products
+    @products = Product.all.with_attached_image
+    render json: @products.map { |product|
+      product.image.attachment ? product.as_json.merge({ image: url_for(product.image) }) : product.as_json.merge({ image: '' })
+    }
   end
 
   # GET /products/1
@@ -19,6 +22,7 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
 
+    @product.image.attach(params.dig(:product, :image))
     if @product.save
       render json: @product, status: :created, location: @product
     else
